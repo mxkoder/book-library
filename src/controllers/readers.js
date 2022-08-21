@@ -40,61 +40,24 @@ exports.updateReader = async (req, res) => {
     };
 };
 
+exports.deleteReader = async (req, res) => {
+    const readerId = req.params.id;
 
-// const readerId = 3;
-// const updateData = {
-//   email: `shiny-vampire@rainy-forest.com`
-// };
+    try {
+        const deletedRows = await Reader.destroy({ 
+            where: { id: readerId  } });
 
-// const [ updatedRows ] = await Reader.update(updateData, { where: {} });
+        if (!deletedRows) {
+            res.status(404).send({ error: 'The reader could not be found.' });
+        } else {
+            res.sendStatus(204);
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    };
+};
 
-//--------------------------------------------------------
 
-// exports.updateArtist = async (req, res) => {
-//     const db = await getDb();
-//     const data = req.body;
-//     const { artistId } = req.params;
-
-//     try {
-
-//         const [
-//             { affectedRows },
-//         ] = await db.query('UPDATE Artist SET ? WHERE id = ?', [data, artistId]);
-
-//         if (!affectedRows) {
-//         res.sendStatus(404);
-//         } else {
-//         res.sendStatus(200);
-//         }
-//     } catch (err) {
-//         console.error(err);
-//         res.sendStatus(500);
-//     }
-
-//     db.end();
-// };
-
-// exports.deleteArtist = async (req, res) => {
-//     const db = await getDb();
-//     const { artistId } = req.params;
-
-//     try {
-//         const [[artistToDelete]] = await db.query(
-//             'SELECT * FROM Artist WHERE id = ?', [ artistId, ]
-//             );
-
-//         if (!artistToDelete) {
-//         res.sendStatus(404);
-//         } else {
-//             await db.query('DELETE FROM Artist WHERE id = ?', [artistId]);
-//             res.sendStatus(200);
-//         }
-//     } catch (err) {
-//         console.error(err);
-//         res.sendStatus(500);
-//     }
-
-//     db.end();
-// };
 
 
