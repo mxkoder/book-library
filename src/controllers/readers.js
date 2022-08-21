@@ -15,28 +15,40 @@ exports.readByReaderId = async (req, res) => {
     const reader = await Reader.findByPk(readerId);
 
     if(!reader) {
-        res.status(404).send({ error: 'The reader could not be found.' })
+        res.status(404).send({ error: 'The reader could not be found.' });
     } else {
         res.status(200).json(reader);
     }
 };
 
-// exports.readById = async (req, res) => {
-//     const db = await getDb();
-//     const { artistId } = req.params;
+exports.updateReader = async (req, res) => {
+    const readerId = req.params.id;
+    const updateData = req.body;
 
-//     const [[selectedArtist]] = await db.query(
-//         'SELECT * FROM Artist WHERE id = ?', [ artistId, ]
-//         );
+    try {
+        const [ updatedRows ] = await Reader.update(updateData, { 
+            where: { id: readerId  } });
 
-//     if(!selectedArtist) {
-//         res.sendStatus(404);
-//     } else {
-//         res.status(200).json(selectedArtist);
-//     }
+        if (!updatedRows) {
+            res.status(404).send({ error: 'The reader could not be found.' });
+        } else {
+            res.sendStatus(200);
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    };
+};
 
-//     db.end();
+
+// const readerId = 3;
+// const updateData = {
+//   email: `shiny-vampire@rainy-forest.com`
 // };
+
+// const [ updatedRows ] = await Reader.update(updateData, { where: {} });
+
+//--------------------------------------------------------
 
 // exports.updateArtist = async (req, res) => {
 //     const db = await getDb();

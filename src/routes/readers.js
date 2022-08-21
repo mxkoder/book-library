@@ -9,4 +9,6 @@ router.post('/', readersController.create);
 router.get('/', readersController.read);
 router.get('/:id', readersController.readByReaderId);
 
+router.patch('/:id', readersController.updateReader);
+
 module.exports = router
