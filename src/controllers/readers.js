@@ -14,18 +14,12 @@ exports.readByReaderId = async (req, res) => {
     const readerId = req.params.id;
     const reader = await Reader.findByPk(readerId);
 
-    //Cat.findByPk(req.params.catId).then(cat => res.status(200).json(cat))
-
-    // console.log(`reader ======> ${reader}`);
-    // console.log(`readerId ======> ${readerId}`);
-    // console.log(`req.params ======> ${req.params}`);
-
     if(!reader) {
         res.status(404).send({ error: 'The reader could not be found.' })
     } else {
         res.status(200).json(reader);
     }
-}
+};
 
 // exports.readById = async (req, res) => {
 //     const db = await getDb();
