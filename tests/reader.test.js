@@ -43,7 +43,7 @@ describe('/readers', () => {
                     password: 'supersecret',
                 }),
 
-                Reader.create({ name: 'Arya Stark', email: 'vmorgul@me.com', password: 'needle' }),
+                Reader.create({ name: 'Arya Stark', email: 'vmorgul@me.com', password: 'needle_password' }),
                 Reader.create({ name: 'Lyra Belacqua', email: 'darknorth123@msn.org', password: 'pantalaimon' }),
             ]);
         });
