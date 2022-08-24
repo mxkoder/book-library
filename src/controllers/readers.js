@@ -8,11 +8,10 @@ exports.create = async (req, res) => {
         res.status(201).json(newReader);
     } catch (err) {
         console.error(err);
-        res.sendStatus(500);
+        console.log('err.message ====>', err.message);
+        //res.sendStatus(500);
+        res.status(500).send(err.message);
     }
-    // errors: [
-    //     ValidationErrorItem {
-    //       message: 'Validation notEmpty on password failed',
 };
 
 exports.read = async (_, res) => {
