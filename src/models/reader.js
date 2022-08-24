@@ -13,7 +13,8 @@ module.exports = (connection, DataTypes) => {
             allowNull:false,
             validate: { 
                 notNull: true,
-                notEmpty: true, 
+                notEmpty: true,
+                isEmail: true, 
             },
         },
         password: {
@@ -22,6 +23,7 @@ module.exports = (connection, DataTypes) => {
             validate: { 
                 notNull: true,
                 notEmpty: true, 
+                len: [8,],
             },
         },
     };

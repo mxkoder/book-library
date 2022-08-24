@@ -10,6 +10,9 @@ exports.create = async (req, res) => {
         console.error(err);
         res.sendStatus(500);
     }
+    // errors: [
+    //     ValidationErrorItem {
+    //       message: 'Validation notEmpty on password failed',
 };
 
 exports.read = async (_, res) => {
