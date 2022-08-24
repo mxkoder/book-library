@@ -11,6 +11,8 @@ exports.create = async (req, res) => {
         console.log('err.message ====>', err.message);
         //res.sendStatus(500);
         res.status(500).send(err.message);
+
+        //if 'err.message === Validation error: Validation len on password failed', send..
     }
 };
 
