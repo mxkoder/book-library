@@ -1,5 +1,5 @@
 const { Reader } = require('../models');
-// import error helper fn
+const readerErrorHandling = require('../helper-functions/readers-error-handling');
 
 exports.create = async (req, res) => {
 
@@ -9,20 +9,11 @@ exports.create = async (req, res) => {
         res.status(201).json(newReader);
     } catch (err) {
         console.error(err);
-        console.log('err.message ====>', err.message);
-        //console.log('err.path ====>', err.path);
-        //console.log('err.errors ====>', err.errors);
-        console.log('err.errors[0].path ====>', err.errors[0].path);
-        console.log('err.errors[0].value ====>', err.errors[0].value);
-        //res.sendStatus(500);
-        //const newErrorMessage = myHelperFunction(err.message)
 
-        res.status(500).send(err.message); //instead newErrorMessage from helper function
-        //Make sure the controller knows how to handle the different error messages the model might throw.
+        const userErrorMessage = readerErrorHandling(err); // helper function
+        //console.log('errorHandling ====>', userErrorMessage);
 
-        //in helper function do - if 'err.message === Validation error: Validation len on password failed', send..
-
-
+        res.status(500).send(userErrorMessage); 
     }
 };
 
