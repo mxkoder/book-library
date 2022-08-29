@@ -12,7 +12,7 @@ describe('/books', () => {
 
     describe('with no records in the database', () => {
         describe('POST /books', () => {
-        it('creates a new reader in the database', async () => {
+        it('creates a new book in the database', async () => {
                 const response = await request(app).post('/books').send({
                     title: 'Pride and Prejudice',
                     author: 'Jane Austen',
@@ -30,6 +30,28 @@ describe('/books', () => {
                 expect(newBookRecord.author).to.equal('Jane Austen');
                 expect(newBookRecord.genre).to.equal('Period Romance');
                 expect(newBookRecord.ISBN).to.equal('9780141439518');
+            });
+
+            it('responds with an error message if the book details do not comply with validation and constraints', async () => {
+                const noTitle = await request(app).post('/books').send({
+                    title: '',
+                    author: 'Jane Austen',
+                    genre: 'Period Romance',
+                    ISBN: '9780141439518',
+                });
+
+                console.log('status ======>', noTitle.status);
+                expect(noTitle.status).to.equal(500);
+                expect(noTitle.body.error).to.equal('Please enter a book title');
+
+                const noAuthor = await request(app).post('/books').send({
+                    title: 'Pride and Prejudice',
+                    author: '',
+                    genre: 'Period Romance',
+                    ISBN: '9780141439518',
+                });
+                expect(noAuthor.status).to.equal(500);
+                expect(noAuthor.body.error).to.equal('Please enter the author of the book');
             });
         });
     });
