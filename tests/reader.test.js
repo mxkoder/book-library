@@ -12,7 +12,7 @@ describe('/readers', () => {
 
     describe('with no records in the database', () => {
         describe('POST /readers', () => {
-        it('creates a new reader in the database', async () => {
+            it('creates a new reader in the database', async () => {
                 const response = await request(app).post('/readers').send({
                     name: 'Elizabeth Bennet',
                     email: 'future_ms_darcy@gmail.com',
@@ -29,6 +29,47 @@ describe('/readers', () => {
                 expect(newReaderRecord.email).to.equal('future_ms_darcy@gmail.com');
                 expect(newReaderRecord.password).to.equal('supersecret');
             });
+            it('responds with an error message if the reader details are entered incorrectly', async() => {
+                const shortPassword = await request(app).post('/readers').send({
+                    name: 'Elizabeth Bennet',
+                    email: 'future_ms_darcy@gmail.com',
+                    password: 'short',
+                });
+                expect(shortPassword.status).to.equal(500);
+                expect(shortPassword.body.error).to.equal('Please enter a password longer than 8 characters');
+
+                const invalidEmail = await request(app).post('/readers').send({
+                    name: 'Elizabeth Bennet',
+                    email: 'future_ms_darcy@gmailcom',
+                    password: 'correctlength',
+                });
+                expect(invalidEmail.status).to.equal(500);
+                expect(invalidEmail.body.error).to.equal('Please enter a valid email address');
+
+                const noName = await request(app).post('/readers').send({
+                    name: '',
+                    email: 'future_ms_darcy@gmail.com',
+                    password: 'correctlength',
+                });
+                expect(noName.status).to.equal(500);
+                expect(noName.body.error).to.equal('Please enter a name');
+
+                const noEmail = await request(app).post('/readers').send({
+                    name: 'Elizabeth Bennet',
+                    email: '',
+                    password: 'correctlength',
+                });
+                expect(noEmail.status).to.equal(500);
+                expect(noEmail.body.error).to.equal('Please enter an email address');
+
+                const noPassword = await request(app).post('/readers').send({
+                    name: 'Elizabeth Bennet',
+                    email: 'future_ms_darcy@gmail.com',
+                    password: '',
+                });
+                expect(noPassword.status).to.equal(500);
+                expect(noPassword.body.error).to.equal('Please enter a password');
+            })
         });
     });
 

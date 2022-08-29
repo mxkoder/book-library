@@ -5,22 +5,22 @@ const readerErrorHandling = (err) => {
     switch (err.errors[0].message) {
 
         case 'Validation len on password failed':
-            errorMessage = 'Please enter a password longer than 8 characters';
+            errorMessage = { error: 'Please enter a password longer than 8 characters' };
             break;
         case 'Validation isEmail on email failed':
-            errorMessage = 'Please enter a valid email address';
+            errorMessage = { error: 'Please enter a valid email address' };
             break;
         case 'Validation notEmpty on name failed':
-            errorMessage = 'Please enter a name';
+            errorMessage = { error: 'Please enter a name' };
             break;
         case 'Validation notEmpty on email failed':
-            errorMessage = 'Please enter an email address';
+            errorMessage = { error: 'Please enter an email address' };
             break;
         case 'Validation notEmpty on password failed':
-            errorMessage = 'Please enter a password';
+            errorMessage = { error: 'Please enter a password' };
             break;
         default:
-            errorMessage = 'Internal server error';
+            errorMessage = { error: 'Internal server error' };
     };
     return errorMessage;
 }; 
