@@ -152,35 +152,35 @@ describe('/readers', () => {
             });
 
             it('returns an error message if the update values do not comply with Reader validation & constraints', async () => {
-                const shortPassword = await request(app)
+                const shortPasswordUpdate = await request(app)
                 .patch('/readers/1')
                 .send({ password: 'short' });
-                expect(shortPassword.status).to.equal(500);
-                expect(shortPassword.body.error).to.equal('Please enter a password longer than 8 characters');
+                expect(shortPasswordUpdate.status).to.equal(500);
+                expect(shortPasswordUpdate.body.error).to.equal('Please enter a password longer than 8 characters');
 
-                const invalidEmail = await request(app)
+                const invalidEmailUpdate = await request(app)
                 .patch('/readers/1')
                 .send({ email: 'email@email' });
-                expect(invalidEmail.status).to.equal(500);
-                expect(invalidEmail.body.error).to.equal('Please enter a valid email address');
+                expect(invalidEmailUpdate.status).to.equal(500);
+                expect(invalidEmailUpdate.body.error).to.equal('Please enter a valid email address');
 
-                const noName = await request(app)
+                const noNameUpdate = await request(app)
                 .patch('/readers/1')
                 .send({ name: '' });
-                expect(noName.status).to.equal(500);
-                expect(noName.body.error).to.equal('Please enter a name');
+                expect(noNameUpdate.status).to.equal(500);
+                expect(noNameUpdate.body.error).to.equal('Please enter a name');
 
-                const noEmail = await request(app)
+                const noEmailUpdate = await request(app)
                 .patch('/readers/1')
                 .send({ email: '' });
-                expect(noEmail.status).to.equal(500);
-                expect(noEmail.body.error).to.equal('Please enter an email address');
+                expect(noEmailUpdate.status).to.equal(500);
+                expect(noEmailUpdate.body.error).to.equal('Please enter an email address');
 
-                const noPassword = await request(app)
+                const noPasswordUpdate = await request(app)
                 .patch('/readers/1')
                 .send({ password: '' });
-                expect(noPassword.status).to.equal(500);
-                expect(noPassword.body.error).to.equal('Please enter a password');
+                expect(noPasswordUpdate.status).to.equal(500);
+                expect(noPasswordUpdate.body.error).to.equal('Please enter a password');
 
             });
         });

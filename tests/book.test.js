@@ -39,8 +39,6 @@ describe('/books', () => {
                     genre: 'Period Romance',
                     ISBN: '9780141439518',
                 });
-
-                console.log('status ======>', noTitle.status);
                 expect(noTitle.status).to.equal(500);
                 expect(noTitle.body.error).to.equal('Please enter a book title');
 
@@ -135,6 +133,20 @@ describe('/books', () => {
 
                 expect(response.status).to.equal(404);
                 expect(response.body.error).to.equal('The book could not be found.');
+            });
+
+            it('returns an error message if the update values do not comply with Book validation & constraints', async () => {
+                const noTitleUpdate = await request(app)
+                .patch('/books/1')
+                .send({ title: '' });
+                expect(noTitleUpdate.status).to.equal(500);
+                expect(noTitleUpdate.body.error).to.equal('Please enter a book title');
+
+                const noAuthorUpdate = await request(app)
+                .patch('/books/1')
+                .send({ author: '' });
+                expect(noAuthorUpdate.status).to.equal(500);
+                expect(noAuthorUpdate.body.error).to.equal('Please enter the author of the book');
             });
         });
 

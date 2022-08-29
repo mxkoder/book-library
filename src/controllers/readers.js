@@ -1,5 +1,5 @@
 const { Reader } = require('../models');
-const readerErrorHandling = require('../helper-functions/readers-error-handling');
+const readerErrorHandling = require('../error-handling/readers-error-handling');
 
 exports.create = async (req, res) => {
 

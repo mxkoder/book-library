@@ -1,5 +1,5 @@
 const { Book } = require('../models');
-const bookErrorHandling = require('../helper-functions/books-error-handling');
+const bookErrorHandling = require('../error-handling/books-error-handling');
 
 exports.create = async (req, res) => {
     try {
@@ -44,7 +44,8 @@ exports.updateBook = async (req, res) => {
         }
     } catch (err) {
         console.error(err);
-        res.sendStatus(500);
+        const userErrMessageUpdate = bookErrorHandling(err); 
+        res.status(500).send(userErrMessageUpdate); 
     };
 };
 
