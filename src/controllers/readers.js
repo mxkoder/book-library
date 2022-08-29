@@ -8,12 +8,14 @@ exports.create = async (req, res) => {
 
         res.status(201).json(newReader);
     } catch (err) {
-        console.error(err);
+        //console.error(err);
+        //console.log('err.message ======>', err.message);
+        //console.log('err.errors[0].message ======>', err.errors[0].message);
 
-        const userErrorMessage = readerErrorHandling(err); // helper function
+        const userErrMessageCreate = readerErrorHandling(err); // helper function
         //console.log('errorHandling ====>', userErrorMessage);
 
-        res.status(500).send(userErrorMessage); 
+        res.status(500).send(userErrMessageCreate); 
     }
 };
 
@@ -48,7 +50,9 @@ exports.updateReader = async (req, res) => {
         }
     } catch (err) {
         console.error(err);
-        res.sendStatus(500);
+
+        const userErrMessageUpdate = readerErrorHandling(err);
+        res.status(500).send(userErrMessageUpdate);
     };
 };
 

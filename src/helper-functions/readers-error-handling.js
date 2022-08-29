@@ -1,6 +1,7 @@
 const readerErrorHandling = (err) => {
 
     let errorMessage;
+
     switch (err.errors[0].message) {
 
         case 'Validation len on password failed':
@@ -11,8 +12,13 @@ const readerErrorHandling = (err) => {
             break;
         case 'Validation notEmpty on name failed':
             errorMessage = 'Please enter a name';
+            break;
         case 'Validation notEmpty on email failed':
             errorMessage = 'Please enter an email address';
+            break;
+        case 'Validation notEmpty on password failed':
+            errorMessage = 'Please enter a password';
+            break;
         default:
             errorMessage = 'Internal server error';
     };
@@ -20,6 +26,9 @@ const readerErrorHandling = (err) => {
 }; 
 
 module.exports = readerErrorHandling
+
+
+// err.errors[0].message
 
         // //console.log('err.path ====>', err.path);
         // //console.log('err.errors ====>', err.errors);
@@ -32,3 +41,5 @@ module.exports = readerErrorHandling
         // //Make sure the controller knows how to handle the different error messages the model might throw.
 
         // //in helper function do - if 'err.message === Validation error: Validation len on password failed', send..
+
+
