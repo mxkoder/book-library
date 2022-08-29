@@ -4,10 +4,10 @@ const readersController = require('../controllers/readers');
 
 const router = express.Router();
 
-router.post('/', readersController.create);
+router.post('/', readersController.createReader);
 
-router.get('/', readersController.read);
-router.get('/:id', readersController.readByReaderId);
+router.get('/', readersController.getAllReaders);
+router.get('/:id', readersController.getReaderById);
 
 router.patch('/:id', readersController.updateReader);
 

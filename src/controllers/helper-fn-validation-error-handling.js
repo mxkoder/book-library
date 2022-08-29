@@ -1,9 +1,9 @@
-const readerErrorHandling = (err) => {
+const validationErrorHandling = (err) => {
 
     let errorMessage;
 
     switch (err.errors[0].message) {
-
+        // readers
         case 'Validation len on password failed':
             errorMessage = { error: 'Please enter a password longer than 8 characters' };
             break;
@@ -19,13 +19,20 @@ const readerErrorHandling = (err) => {
         case 'Validation notEmpty on password failed':
             errorMessage = { error: 'Please enter a password' };
             break;
+        // books
+        case 'Validation notEmpty on title failed':
+            errorMessage = { error: 'Please enter a book title' };
+            break;
+        case 'Validation notEmpty on author failed':
+            errorMessage = { error: 'Please enter the author of the book' };
+            break;
         default:
             errorMessage = { error: 'Internal server error' };
     };
     return errorMessage;
 }; 
 
-module.exports = readerErrorHandling
+module.exports = validationErrorHandling
 
 
 // err.errors[0].message

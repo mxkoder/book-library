@@ -1,79 +1,99 @@
-const { Reader } = require('../models');
-const readerErrorHandling = require('../error-handling/readers-error-handling');
+//const { Reader } = require('../models');
+//const readerErrorHandling = require('./helper-functions/validation-error-handling');
+//const { createRecord } = require('./helper-fn-CRUD-operations');
 
-exports.create = async (req, res) => {
+const {
+    getAllItems,
+    createItem,
+    updateItem,
+    getItemById,
+    deleteItem,
+} = require('./helper-fn-CRUD-operations');
 
-    try {
-        const newReader = await Reader.create(req.body);
+const getAllReaders = (_, res) => getAllItems(res, 'reader');
 
-        res.status(201).json(newReader);
-    } catch (err) {
-        //console.error(err);
-        //console.log('err.message ======>', err.message);
-        //console.log('err.errors[0].message ======>', err.errors[0].message);
+const createReader = (req, res) => createItem(res, 'reader', req.body);
 
-        const userErrMessageCreate = readerErrorHandling(err); // helper function
-        //console.log('errorHandling ====>', userErrorMessage);
+const updateReader = (req, res) =>
+updateItem(res, 'reader', req.body, req.params.id);
 
-        res.status(500).send(userErrMessageCreate); 
-    }
+const getReaderById = (req, res) => getItemById(res, 'reader', req.params.id);
+
+const deleteReader = (req, res) => deleteItem(res, 'reader', req.params.id);
+
+module.exports = {
+    getAllReaders,
+    getReaderById,
+    createReader,
+    updateReader,
+    deleteReader,
 };
 
-exports.read = async (_, res) => {
-    const readers = await Reader.findAll();
-    res.status(200).json(readers);
-};
+//====================================================================
+// const createReader = (req, res) => createRecord(res, 'reader', req.body);
 
-exports.readByReaderId = async (req, res) => {
-    const readerId = req.params.id;
-    const reader = await Reader.findByPk(readerId);
+// exports.read = async (_, res) => {
+//     const readers = await Reader.findAll();
+//     res.status(200).json(readers);
+// };
 
-    if(!reader) {
-        res.status(404).send({ error: 'The reader could not be found.' });
-    } else {
-        res.status(200).json(reader);
-    }
-};
+// exports.readByReaderId = async (req, res) => {
+//     const readerId = req.params.id;
+//     const reader = await Reader.findByPk(readerId);
 
-exports.updateReader = async (req, res) => {
-    const readerId = req.params.id;
-    const updateData = req.body;
+//     if(!reader) {
+//         res.status(404).send({ error: 'The reader could not be found.' });
+//     } else {
+//         res.status(200).json(reader);
+//     }
+// };
 
-    try {
-        const [ updatedRows ] = await Reader.update(updateData, { 
-            where: { id: readerId  } });
+// exports.updateReader = async (req, res) => {
+//     const readerId = req.params.id;
+//     const updateData = req.body;
 
-        if (!updatedRows) {
-            res.status(404).send({ error: 'The reader could not be found.' });
-        } else {
-            res.sendStatus(200);
-        }
-    } catch (err) {
-        console.error(err);
+//     try {
+//         const [ updatedRows ] = await Reader.update(updateData, { 
+//             where: { id: readerId  } });
 
-        const userErrMessageUpdate = readerErrorHandling(err);
-        res.status(500).send(userErrMessageUpdate);
-    };
-};
+//         if (!updatedRows) {
+//             res.status(404).send({ error: 'The reader could not be found.' });
+//         } else {
+//             res.sendStatus(200);
+//         }
+//     } catch (err) {
+//         console.error(err);
 
-exports.deleteReader = async (req, res) => {
-    const readerId = req.params.id;
+//         const userErrMessageUpdate = readerErrorHandling(err);
+//         res.status(500).send(userErrMessageUpdate);
+//     };
+// };
 
-    try {
-        const deletedRows = await Reader.destroy({ 
-            where: { id: readerId  } });
+// exports.deleteReader = async (req, res) => {
+//     const readerId = req.params.id;
 
-        if (!deletedRows) {
-            res.status(404).send({ error: 'The reader could not be found.' });
-        } else {
-            res.sendStatus(204);
-        }
-    } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
-    };
-};
+//     try {
+//         const deletedRows = await Reader.destroy({ 
+//             where: { id: readerId  } });
 
+//         if (!deletedRows) {
+//             res.status(404).send({ error: 'The reader could not be found.' });
+//         } else {
+//             res.sendStatus(204);
+//         }
+//     } catch (err) {
+//         console.error(err);
+//         res.sendStatus(500);
+//     };
+// };
+
+// module.exports = {
+//     //getReaders,
+//     //getReaderById,
+//     createReader,
+//     //updateReader,
+//     //deleteReader,
+// };
 
 
 

@@ -1,5 +1,5 @@
 const { Book } = require('../models');
-const bookErrorHandling = require('../error-handling/books-error-handling');
+const bookErrorHandling = require('./helper-fn-validation-error-handling');
 
 exports.create = async (req, res) => {
     try {
