@@ -1,6 +1,4 @@
-//const { Reader, Book } = require('../models');
 const validationErrorHandling = require('./helper-fn-validation-error-handling');
-
 const { Book, Reader, /*Genre*/ } = require('../models');
 
 const get404Error = (model) => ({ error: `The ${model} could not be found.` });
@@ -62,16 +60,21 @@ const createItem = async (res, model, item) => {
 const updateItem = async (res, model, item, id) => {
     const Model = getModel(model);
 
-    const [ itemsUpdated ]= await Model.update(item, { where: { id } });
+    try {
+        const [ updatedRows ]= await Model.update(item, { where: { id } });
 
-    if (!itemsUpdated) {
-        res.status(404).json(get404Error(model));
-    } else {
-        const updatedItem = await Model.findByPk(id);
-        const itemWithoutPassword = removePassword(updatedItem.get());
-        res.status(200).json(itemWithoutPassword);
-        // need to add validation error handling here!
-    }
+        if (!updatedRows) {
+            res.status(404).json(get404Error(model));
+        } else {
+            const updatedItem = await Model.findByPk(id);
+            const itemWithoutPassword = removePassword(updatedItem.get());
+            res.status(200).json(itemWithoutPassword);
+        }
+    } catch (err) {
+        const userErrMessageUpdate = validationErrorHandling(err);
+        res.status(400).send(userErrMessageUpdate);       
+    };
+
 };
 
 const getItemById = async (res, model, id) => {
