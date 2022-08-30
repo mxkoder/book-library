@@ -44,17 +44,17 @@ const getAllItems = async (res, model) => {
     res.status(200).json(itemsWithoutPassword);
 };
 
-const createItem = async (res, model, item) => {
+const createItem = async (res, model, itemData) => {
     const Model = getModel(model);
 
     try {
-        const newItem = await Model.create(item);
+        const newItem = await Model.create(itemData);
         const itemWithoutPassword = removePassword(newItem.get());
     
         res.status(201).json(itemWithoutPassword);
     } catch (err) {
-        const userErrMessageCreate = validationErrorHandling(err); 
-        res.status(400).send(userErrMessageCreate); 
+        const userErrMessage = validationErrorHandling(err); 
+        res.status(400).send(userErrMessage); 
     }
 };
 
@@ -89,6 +89,7 @@ const getItemById = async (res, model, id) => {
         if (!item) {
             res.status(404).json(get404Error(model));
         } else {
+            // when do genre - check this item.dataValues - clarify?
             const itemWithoutPassword = removePassword(item.dataValues);
             res.status(200).json(itemWithoutPassword);
         }
