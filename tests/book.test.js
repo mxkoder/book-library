@@ -39,7 +39,7 @@ describe('/books', () => {
                     genre: 'Period Romance',
                     ISBN: '9780141439518',
                 });
-                expect(noTitle.status).to.equal(500);
+                expect(noTitle.status).to.equal(400);
                 expect(noTitle.body.error).to.equal('Please enter a book title');
 
                 const noAuthor = await request(app).post('/books').send({
@@ -48,7 +48,7 @@ describe('/books', () => {
                     genre: 'Period Romance',
                     ISBN: '9780141439518',
                 });
-                expect(noAuthor.status).to.equal(500);
+                expect(noAuthor.status).to.equal(400);
                 expect(noAuthor.body.error).to.equal('Please enter the author of the book');
             });
         });
@@ -139,13 +139,13 @@ describe('/books', () => {
                 const noTitleUpdate = await request(app)
                 .patch('/books/1')
                 .send({ title: '' });
-                expect(noTitleUpdate.status).to.equal(500);
+                expect(noTitleUpdate.status).to.equal(400);
                 expect(noTitleUpdate.body.error).to.equal('Please enter a book title');
 
                 const noAuthorUpdate = await request(app)
                 .patch('/books/1')
                 .send({ author: '' });
-                expect(noAuthorUpdate.status).to.equal(500);
+                expect(noAuthorUpdate.status).to.equal(400);
                 expect(noAuthorUpdate.body.error).to.equal('Please enter the author of the book');
             });
         });

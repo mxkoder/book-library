@@ -27,7 +27,7 @@ const validationErrorHandling = (err) => {
             errorMessage = { error: 'Please enter the author of the book' };
             break;
         default:
-            errorMessage = { error: 'Internal server error' };
+            errorMessage = { error: 'The request could not be completed' };
     };
     return errorMessage;
 }; 

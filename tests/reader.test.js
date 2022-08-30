@@ -25,6 +25,7 @@ describe('/readers', () => {
 
                 expect(response.status).to.equal(201);
                 expect(response.body.name).to.equal('Elizabeth Bennet');
+                expect(response.body.password).to.equal(undefined);
                 expect(newReaderRecord.name).to.equal('Elizabeth Bennet');
                 expect(newReaderRecord.email).to.equal('future_ms_darcy@gmail.com');
                 expect(newReaderRecord.password).to.equal('supersecret');
@@ -101,7 +102,7 @@ describe('/readers', () => {
 
                     expect(reader.name).to.equal(expected.name);
                     expect(reader.email).to.equal(expected.email);
-                    //expect(reader.password).to.equal(expected.password);
+                    expect(reader.password).to.equal(undefined);
                 });
             });
         });
@@ -115,7 +116,7 @@ describe('/readers', () => {
                 expect(response.status).to.equal(200);
                 expect(response.body.name).to.equal(reader.name);
                 expect(response.body.email).to.equal(reader.email);
-                //expect(response.body.password).to.equal(reader.password);
+                expect(response.body.password).to.equal(undefined);
             });
 
             it('returns a 404 if the reader does not exist', async () => {
@@ -139,6 +140,7 @@ describe('/readers', () => {
                 });
 
                 expect(response.status).to.equal(200);
+                expect(response.body.password).to.equal(undefined);
                 expect(updatedReaderRecord.email).to.equal('miss_e_bennet@gmail.com');
             });
 

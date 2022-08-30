@@ -3,14 +3,14 @@ const { Book, Reader, /*Genre*/ } = require('../models');
 
 const get404Error = (model) => ({ error: `The ${model} could not be found.` });
 
-const getModel = (model) => {
+const getModel = (selectedModel) => {
     const models = {
         book: Book,
         reader: Reader,
         //genre: Genre,
     };
 
-    return models[model];
+    return models[selectedModel];
 };
 
 const getOptions = (model) => {
@@ -21,12 +21,13 @@ const getOptions = (model) => {
     return {};
 };
 
-const removePassword = (obj) => {
-    if (obj.hasOwnProperty('password')) {
-        delete obj.password;
+// security feature to prevent password being returned for get requests
+const removePassword = (item) => {
+    if (item.hasOwnProperty('password')) {
+        delete item.password;
     }
 
-    return obj;
+    return item;
 };
 
 const getAllItems = async (res, model) => {
@@ -57,11 +58,11 @@ const createItem = async (res, model, item) => {
     }
 };
 
-const updateItem = async (res, model, item, id) => {
+const updateItem = async (res, model, updateData, id) => {
     const Model = getModel(model);
 
     try {
-        const [ updatedRows ]= await Model.update(item, { where: { id } });
+        const [ updatedRows ]= await Model.update(updateData, { where: { id } });
 
         if (!updatedRows) {
             res.status(404).json(get404Error(model));
@@ -84,24 +85,34 @@ const getItemById = async (res, model, id) => {
 
     const item = await Model.findByPk(id, { ...options });
 
-    if (!item) {
-        res.status(404).json(get404Error(model));
-    } else {
-        const itemWithoutPassword = removePassword(item.dataValues);
-        res.status(200).json(itemWithoutPassword);
+    try {
+        if (!item) {
+            res.status(404).json(get404Error(model));
+        } else {
+            const itemWithoutPassword = removePassword(item.dataValues);
+            res.status(200).json(itemWithoutPassword);
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
     }
 };
 
 const deleteItem = async (res, model, id) => {
     const Model = getModel(model);
 
-    const itemsDeleted = await Model.destroy({ where: { id } });
+    const deletedRows = await Model.destroy({ where: { id } });
 
-    if (!itemsDeleted) {
-        res.status(404).json(get404Error(model));
-    } else {
-        res.status(204).send();
-    }
+    try {
+        if (!deletedRows) {
+            res.status(404).json(get404Error(model));
+        } else {
+            res.status(204).send();
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    };
 };
 
 module.exports = {
@@ -111,32 +122,3 @@ module.exports = {
     getItemById,
     deleteItem,
 };
- //============================================
-// const createRecord = async (res, modelName, record) => {
-//     const Model = getModel(modelName);
-
-//     try {
-//         const newRecord = await Model.create(record);
-//         //const itemWithoutPassword = removePassword(newRecord.get());
-//         res.status(201).json(newRecord/*itemWithoutPassword*/);
-
-//     } catch (err) {
-//         const userErrMessageCreate = validationErrorHandling(err); 
-//         res.status(500).send(userErrMessageCreate); 
-//     }
-// };
-
-
-
-
-// exports.create = async (req, res) => {
-//     try {
-//         const newBook = await Book.create(req.body);
-//         res.status(201).json(newBook);
-
-//     } catch (err) {
-//         const userErrMessageCreate = bookErrorHandling(err); 
-//         res.status(500).send(userErrMessageCreate); 
-//     };
-
-// };

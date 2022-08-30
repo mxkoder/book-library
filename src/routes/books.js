@@ -4,10 +4,10 @@ const booksController = require('../controllers/books');
 
 const router = express.Router();
 
-router.post('/', booksController.create);
+router.post('/', booksController.createBook);
 
-router.get('/', booksController.read);
-router.get('/:id', booksController.readByBookId);
+router.get('/', booksController.getAllBooks);
+router.get('/:id', booksController.getBookById);
 
 router.patch('/:id', booksController.updateBook);
 
