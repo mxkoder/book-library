@@ -1,5 +1,6 @@
 const validationErrorHandling = require('./helper-fn-validation-error-handling');
-const { Book, Reader, /*Genre*/ } = require('../models');
+const { Book, Reader, Genre, Author } = require('../models');
+//const author = require('../models/author');
 
 const get404Error = (model) => ({ error: `The ${model} could not be found.` });
 
@@ -7,7 +8,8 @@ const getModel = (selectedModel) => {
     const models = {
         book: Book,
         reader: Reader,
-        //genre: Genre,
+        genre: Genre,
+        author: Author,
     };
 
     return models[selectedModel];
