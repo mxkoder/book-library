@@ -26,6 +26,20 @@ const validationErrorHandling = (err) => {
         case 'Validation notEmpty on author failed':
             errorMessage = { error: 'Please enter the author of the book' };
             break;
+        // authors
+        case 'Author.author cannot be null':
+            errorMessage = { error: 'Please enter the author of the book' };
+            break;
+        case 'author must be unique':
+            errorMessage = { error: 'There is already an entry for this author, please enter a new author or use the existing author entry' };
+            break;
+        // genres
+        case 'Validation notEmpty on genre failed':
+            errorMessage = { error: 'Please enter a genre' };
+            break;
+        case 'genre must be unique':
+            errorMessage = { error: 'There is already an entry for this genre, please enter a new genre or use the existing genre' };
+            break;
         default:
             errorMessage = { error: 'The request could not be completed' };
     };

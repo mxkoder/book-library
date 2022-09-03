@@ -18,7 +18,7 @@ const getModel = (selectedModel) => {
 const getOptions = (model) => {
     //if (model === 'book') return { include: Genre };
 
-    if (model === 'genre') return { include: Book };
+    //if (model === 'genre') return { include: Book };
 
     return {};
 };
@@ -55,6 +55,7 @@ const createItem = async (res, model, itemData) => {
     
         res.status(201).json(itemWithoutPassword);
     } catch (err) {
+        console.log(err);
         const userErrMessage = validationErrorHandling(err); 
         res.status(400).send(userErrMessage); 
     }
@@ -74,8 +75,11 @@ const updateItem = async (res, model, updateData, id) => {
             res.status(200).json(itemWithoutPassword);
         }
     } catch (err) {
+        console.log(err);
         const userErrMessageUpdate = validationErrorHandling(err);
-        res.status(400).send(userErrMessageUpdate);       
+        res.status(400).send(userErrMessageUpdate);    
+
+        // res.sendStatus(500);   
     };
 
 };
