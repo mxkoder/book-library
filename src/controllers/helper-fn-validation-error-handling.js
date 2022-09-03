@@ -38,7 +38,7 @@ const validationErrorHandling = (err) => {
             errorMessage = { error: 'Please enter a genre' };
             break;
         case 'genre must be unique':
-            errorMessage = { error: 'There is already an entry for this genre, please enter a new genre or use the existing genre' };
+            errorMessage = { error: 'There is already an entry for this genre, please enter a new genre or use the existing genre entry' };
             break;
         default:
             errorMessage = { error: 'The request could not be completed' };
