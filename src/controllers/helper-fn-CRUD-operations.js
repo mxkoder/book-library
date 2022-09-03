@@ -16,9 +16,22 @@ const getModel = (selectedModel) => {
 };
 
 const getOptions = (model) => {
-    if (model === 'book') return { include: Genre };
+    if (model === 'book') return {
+        include: [
+            {
+                model: Genre,
+                required: true
+            },
+            {
+                model: Author,
+                required: true
+            },
+        ]
+    };
 
     if (model === 'genre') return { include: Book };
+
+    if (model === 'author') return { include: Book };
 
     return {};
 };
@@ -55,7 +68,7 @@ const createItem = async (res, model, itemData) => {
     
         res.status(201).json(itemWithoutPassword);
     } catch (err) {
-        //console.log(err);
+        console.log(err);
         const userErrMessage = validationErrorHandling(err); 
         res.status(400).send(userErrMessage); 
     }

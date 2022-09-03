@@ -20,8 +20,15 @@ const setupDatabase = () => {
     const Genre = GenreModel(connection, Sequelize);
 
     Reader.hasMany(Book);
+
+    // Associations for Genre
     Genre.hasMany(Book);
     Book.belongsTo(Genre);
+
+    // Associations for Author
+    Author.hasMany(Book);
+    Book.belongsTo(Author);
+    
 
     connection.sync({ alter: true });
     return {
