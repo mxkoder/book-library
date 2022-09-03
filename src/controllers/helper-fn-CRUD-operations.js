@@ -16,9 +16,9 @@ const getModel = (selectedModel) => {
 };
 
 const getOptions = (model) => {
-    //if (model === 'book') return { include: Genre };
+    if (model === 'book') return { include: Genre };
 
-    //if (model === 'genre') return { include: Book };
+    if (model === 'genre') return { include: Book };
 
     return {};
 };
