@@ -97,6 +97,8 @@ describe('/books', () => {
                 expect(response.status).to.equal(200);
                 expect(response.body.length).to.equal(3);
 
+                console.log('=====> GET/books response.body', response.body);
+
                 response.body.forEach((book) => {
                     const expected = books.find((a) => a.id === book.id);
 
@@ -104,6 +106,9 @@ describe('/books', () => {
                     expect(book.AuthorId).to.equal(expected.AuthorId);
                     expect(book.GenreId).to.equal(expected.GenreId);
                     expect(book.ISBN).to.equal(expected.ISBN);
+
+                    expect(book.Author).to.have.own.property('author');
+                    expect(book.Genre).to.have.own.property('genre');
                 });
             });
         });
@@ -116,9 +121,12 @@ describe('/books', () => {
 
                 expect(response.status).to.equal(200);
                 expect(response.body.title).to.equal(book.title);
-                expect(book.AuthorId).to.equal(book.AuthorId);
-                expect(book.GenreId).to.equal(book.GenreId);
+                expect(response.body.AuthorId).to.equal(book.AuthorId);
+                expect(response.body.GenreId).to.equal(book.GenreId);
                 expect(response.body.ISBN).to.equal(book.ISBN);
+
+                expect(response.body.Author).to.have.own.property('author');
+                expect(response.body.Genre).to.have.own.property('genre');
             });
 
             it('returns a 404 if the book does not exist', async () => {
