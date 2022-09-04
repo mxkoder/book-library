@@ -23,5 +23,6 @@ Next steps - functionality
 Next steps - design
 - Tests:
     - refactor tests to reduce repetition
+    - Genre and Author test suites need tests adding to check Book associations are being returned for read and read by id api queries
     - randomiser (faker.js???)
 - removing time stamps

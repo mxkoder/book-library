@@ -30,6 +30,10 @@ const validationErrorHandling = (err) => {
         case 'author must be unique':
             errorMessage = { error: 'There is already an entry for this author, please enter a new author or use the existing author entry' };
             break;
+        case 'Validation notEmpty on author failed':
+            errorMessage = { error: 'Please enter the author of the book' };
+            break;
+
         // genres
         case 'Validation notEmpty on genre failed':
             errorMessage = { error: 'Please enter a genre' };
