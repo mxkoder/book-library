@@ -18,5 +18,7 @@ Next steps - functionality
 - short descriptions / summaries for each book entry
 
 Next steps - design
-- refactor tests to reduce repetition
+- Tests:
+    - refactor tests to reduce repetition
+    - randomiser (faker.js???)
 - removing time stamps
