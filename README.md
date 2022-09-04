@@ -22,12 +22,12 @@ Download and initial setup:
 ### Local Environment Variables
 The database environment variables are of not in the github repository. To setup environment variables locally, create '.env' and '.env.test' files at root level in the project directory. The variables then need to filled entered and filled in for both '.env' and '.env.test' files to connect to a database:
 
-``DB_PASSWORD= //enter password``
-``DB_NAME= //enter database name, or test database name``
-``DB_USER= // enter database user type``
-``DB_HOST=localhost``
-``DB_PORT= //enter port``
-``PORT= //enter port``
+``DB_PASSWORD= //enter password``  
+``DB_NAME= //enter database name, or test database name``  
+``DB_USER= // enter database user type``  
+``DB_HOST=localhost``  
+``DB_PORT= //enter port``  
+``PORT= //enter port``  
 
 ## Running the project
 The Book Library project does not currently have a GUI and can be run locally.
