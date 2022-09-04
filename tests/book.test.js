@@ -61,40 +61,57 @@ describe('/books', () => {
         });
     });
 
-    // describe('with records in the database', () => {
-    //     let books;
+    describe('with records in the database', () => {
+        let genres;
+        let authors;
+        let books;
 
-    //     beforeEach(async () => {
-    //         books = await Promise.all([
-    //             Book.create({
-    //                 title: 'Pride and Prejudice',
-    //                 author: 'Jane Austen',
-    //                 genre: 'Period Romance',
-    //                 ISBN: '9780141439518',
-    //             }),
+        beforeEach(async () => {
+            genres = await Promise.all([
+                Genre.create({ genre: 'Thriller' }),
+                Genre.create({ genre: 'Fantasy' }),
+            ]);
 
-    //             Book.create({ title: 'A Song of Ice and Fire', author: 'George R.R. Martin', genre: 'Fantasy', ISBN: '789789221' }),
-    //             Book.create({ title: 'Northern Lights', author: 'Philip Pullman', genre: 'Fantasy', ISBN: '976575741' }),
-    //         ]);
-    //     });
+            authors = await Promise.all([
+                Author.create({ author: 'Alex Michaelides' }),
+                Author.create({ author: 'George R.R. Martin' }),
+                Author.create({ author: 'Philip Pullman' }),
+            ]);
 
-    //     describe('GET /books', () => {
-    //         it('gets all book records', async () => {
-    //             const response = await request(app).get('/books');
 
-    //             expect(response.status).to.equal(200);
-    //             expect(response.body.length).to.equal(3);
+            books = await Promise.all([
+                Book.create({
+                    title: 'The Silent Patient', 
+                    AuthorId: authors[0].dataValues.id, 
+                    GenreId: genres[0].dataValues.id,
+                    ISBN: '9780141439518',
+                }),
 
-    //             response.body.forEach((book) => {
-    //                 const expected = books.find((a) => a.id === book.id);
+                Book.create({ title: 'A Song of Ice and Fire', AuthorId: authors[1].dataValues.id, GenreId: genres[1].dataValues.id, ISBN: '789789221' }),
+                Book.create({ title: 'Northern Lights', AuthorId: authors[2].dataValues.id, GenreId: genres[1].dataValues.id, ISBN: '976575741' }),
+            ]);
+        });
 
-    //                 expect(book.title).to.equal(expected.title);
-    //                 expect(book.author).to.equal(expected.author);
-    //                 expect(book.genre).to.equal(expected.genre);
-    //                 expect(book.ISBN).to.equal(expected.ISBN);
-    //             });
-    //         });
-    //     });
+        describe('GET /books', () => {
+            it('gets all book records', async () => {
+                const response = await request(app).get('/books');
+
+                expect(response.status).to.equal(200);
+                expect(response.body.length).to.equal(3);
+
+                response.body.forEach((book) => {
+                    const expected = books.find((a) => a.id === book.id);
+
+                    console.log('=======> expected', expected);
+                    console.log('=========> books', books);
+
+                    expect(book.title).to.equal(expected.title);
+                    expect(book.AuthorId).to.equal(expected.AuthorId);
+                    expect(book.GenreId).to.equal(expected.GenreId);
+                    expect(book.ISBN).to.equal(expected.ISBN);
+                });
+            });
+        });
 
     //     describe('GET /books/:id', () => {
     //         it('gets book record by id', async () => {
@@ -173,5 +190,5 @@ describe('/books', () => {
     //             expect(response.body.error).to.equal('The book could not be found.');
     //         });
     //     });
-    // });
+    });
 });
