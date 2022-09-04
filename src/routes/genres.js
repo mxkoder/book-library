@@ -1,7 +1,6 @@
 const express = require('express');
 const genresController = require('../controllers/genres');
 
-
 const router = express.Router();
 
 router.post('/', genresController.createGenre);

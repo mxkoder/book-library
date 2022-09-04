@@ -32,22 +32,6 @@ try {
     // create the database if it doesn't already exist
     await db.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`);
 
-    // await db.query(`USE ${DB_NAME}`);
-    // await db.query(`CREATE TABLE IF NOT EXISTS Artist (
-    //     id INT PRIMARY KEY auto_increment,
-    //     name VARCHAR(25),
-    //     genre VARCHAR(25)
-    // )`)
-
-    // await db.query(`USE ${DB_NAME}`);
-    // await db.query(`CREATE TABLE IF NOT EXISTS Album (
-    //     id INT PRIMARY KEY auto_increment,
-    //     name VARCHAR(25),
-    //     year INT,
-    //     artistId INT,
-    //     FOREIGN KEY (artistId) REFERENCES Artist(id)
-    // )`)
-
     db.end();
 
 } catch (err) {

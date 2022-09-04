@@ -19,10 +19,12 @@ const validationErrorHandling = (err) => {
         case 'Validation notEmpty on password failed':
             errorMessage = { error: 'Please enter a password' };
             break;
+
         // books
         case 'Validation notEmpty on title failed':
             errorMessage = { error: 'Please enter a book title' };
             break;
+            
         // authors
         case 'Author.author cannot be null':
             errorMessage = { error: 'Please enter the author of the book' };
@@ -48,20 +50,3 @@ const validationErrorHandling = (err) => {
 }; 
 
 module.exports = validationErrorHandling
-
-
-// err.errors[0].message
-
-        // //console.log('err.path ====>', err.path);
-        // //console.log('err.errors ====>', err.errors);
-        // console.log('err.errors[0].path ====>', err.errors[0].path);
-        // console.log('err.errors[0].value ====>', err.errors[0].value);
-        // //res.sendStatus(500);
-        // //const newErrorMessage = myHelperFunction(err.message)
-
-        // res.status(500).send(err.message); //instead newErrorMessage from helper function
-        // //Make sure the controller knows how to handle the different error messages the model might throw.
-
-        // //in helper function do - if 'err.message === Validation error: Validation len on password failed', send..
-
-
