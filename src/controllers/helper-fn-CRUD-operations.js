@@ -29,7 +29,7 @@ const getOptions = (model) => {
         ]
     };
 
-    if (model === 'genre') return { include: Book };
+    if (model === 'genre') return { include: Book }; 
 
     if (model === 'author') return { include: Book };
 

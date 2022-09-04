@@ -23,9 +23,6 @@ const validationErrorHandling = (err) => {
         case 'Validation notEmpty on title failed':
             errorMessage = { error: 'Please enter a book title' };
             break;
-        case 'Validation notEmpty on author failed':
-            errorMessage = { error: 'Please enter the author of the book' };
-            break;
         // authors
         case 'Author.author cannot be null':
             errorMessage = { error: 'Please enter the author of the book' };
