@@ -69,25 +69,6 @@ Further improvements to project design would include:
     - Refactoring tests to reduce repetition
     - Genre and Author test suites need tests adding to check Book associations are being returned for read and read by id api queries 
     - Make testing more thorough by randomiser test data (e.g. using faker.js)
-- Removing time stamps from responses to HTTP queries. 
-
-### Next steps - functionality
-- frontend / UI
-- improve user experience  
-    - not have to find the id number for genre / author when adding a 'book' entry
-    - when searching by genre / author, currently it will includethe book association online. Within the book entries the genre / author is listed by id only- would be better if users could see all the details of each book in one go. 
-    - need to add validation & constraints to make sure users add a GenreId and AuthorId when creating a book entry. 
-- improve reader authentification - e.g. have a password recovery process eg via email
-- readers 'borrowing' books from other readers
-- short descriptions / summaries for each book entry
-
-### Next steps - design
-- Tests:
-    - refactor tests to reduce repetition
-    - Genre and Author test suites need tests adding to check Book associations are being returned for read and read by id api queries (Book test suite has this)
-    - randomiser (faker.js???)
-- removing time stamps
-
 
 ## Author
 
