@@ -23,6 +23,9 @@ lib-cov
 coverage
 *.lcov
 
+# private notes for project development
+project-notes.md
+
 # nyc test coverage
 .nyc_output
 
