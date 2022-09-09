@@ -11,7 +11,7 @@ const envFile = args === 'test' ? '../.env.test' : '../.env';
 
 // load environment variables from env files
 require('dotenv').config({
-path: path.join(__dirname, envFile),
+    path: path.join(__dirname, envFile),
 });
 
 // destructure environment variables from process.env 
@@ -23,10 +23,10 @@ try {
 
     // connect to the database
     const db = await mysql.createConnection({
-    host: DB_HOST,
-    user: DB_USER,
-    password: DB_PASSWORD,
-    port: DB_PORT,
+        host: DB_HOST,
+        user: DB_USER,
+        password: DB_PASSWORD,
+        port: DB_PORT,
     });
 
     // create the database if it doesn't already exist
@@ -40,11 +40,11 @@ try {
     `Your environment variables might be wrong. Please double check .env file`
     );
     console.log('Environment Variables are:', {
-    DB_PASSWORD,
-    DB_NAME,
-    DB_USER,
-    DB_HOST,
-    DB_PORT,
+        DB_PASSWORD,
+        DB_NAME,
+        DB_USER,
+        DB_HOST,
+        DB_PORT,
     });
     console.log(err);
 }

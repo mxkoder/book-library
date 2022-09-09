@@ -25,6 +25,7 @@ describe('/genres', () => {
                 const noGenre = await request(app).post('/genres').send({
                     genre: ''
                 });
+
                 expect(noGenre.status).to.equal(400);
                 expect(noGenre.body.error).to.equal('Please enter a genre');
             })
@@ -38,7 +39,6 @@ describe('/genres', () => {
                 });
 
                 expect(firstGenre.status).to.equal(201);
-
                 expect(secondGenre.status).to.equal(400);
                 expect(secondGenre.body.error).to.equal('There is already an entry for this genre, please enter a new genre or use the existing genre entry');
             })
@@ -123,6 +123,7 @@ describe('/genres', () => {
                 const emptyStringGenreUpdate = await request(app)
                 .patch(`/genres/${genre.id}`)
                 .send({ genre: '' });
+
                 expect(emptyStringGenreUpdate.status).to.equal(400);
                 expect(emptyStringGenreUpdate.body.error).to.equal('Please enter a genre');
             });
@@ -150,6 +151,7 @@ describe('/genres', () => {
 
             it('returns a 404 if the genre does not exist', async () => {
                 const response = await request(app).delete('/genres/3333');
+                
                 expect(response.status).to.equal(404);
                 expect(response.body.error).to.equal('The genre could not be found.');
             });

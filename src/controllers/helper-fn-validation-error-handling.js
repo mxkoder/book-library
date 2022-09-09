@@ -45,7 +45,7 @@ const validationErrorHandling = (err) => {
             break;
         default:
             errorMessage = { error: 'The request could not be completed' };
-    };
+    }
     return errorMessage;
 }; 
 

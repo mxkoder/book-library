@@ -38,7 +38,6 @@ describe('/authors', () => {
                 });
 
                 expect(firstAuthor.status).to.equal(201);
-
                 expect(secondAuthor.status).to.equal(400);
                 expect(secondAuthor.body.error).to.equal('There is already an entry for this author, please enter a new author or use the existing author entry');
             })
@@ -123,6 +122,7 @@ describe('/authors', () => {
                 const emptyStringAuthorUpdate = await request(app)
                 .patch(`/authors/${author.id}`)
                 .send({ author: '' });
+
                 expect(emptyStringAuthorUpdate.status).to.equal(400);
                 expect(emptyStringAuthorUpdate.body.error).to.equal('Please enter the author of the book');
             });
@@ -150,6 +150,7 @@ describe('/authors', () => {
 
             it('returns a 404 if the author does not exist', async () => {
                 const response = await request(app).delete('/authors/3333');
+                
                 expect(response.status).to.equal(404);
                 expect(response.body.error).to.equal('The author could not be found.');
             });

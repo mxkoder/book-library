@@ -1,7 +1,5 @@
 # Book Library Project
 
-[ note for Reviewer:
-Ideally I would have completed more features on this project and written a more complete README. I hope to work on it more before including it in my Portfolio ]
 
 ## About
 I created this project as part of the [Manchester Codes](https://www.manchestercodes.com/) software engineering course. The objective was to learn about creating a CRUD API using Express.js and Sequelize.
@@ -15,19 +13,19 @@ Testing is done using Chai, Supertest, and Mocha.
 
 Download and initial setup: 
 * Fork the project repository
-* Get the project link, navigate to the local folder where the project should be installed, and run ``git clone`` 
-* Switch to the newly installed project folder and run ``npm install``
-* Use command ``npm test`` to run the test suite
+* Get the project link, navigate to the local folder where the project should be installed, and run `git clone`
+* Switch to the newly installed project folder and run `npm install`
+* Use command `npm test` to run the test suite
 
 ### Local Environment Variables
 The database environment variables are of not in the github repository. To setup environment variables locally, create '.env' and '.env.test' files at root level in the project directory. The variables then need to filled entered and filled in for both '.env' and '.env.test' files to connect to a database:
 
-``DB_PASSWORD= //enter password``  
-``DB_NAME= //enter database name, or test database name``  
-``DB_USER= // enter database user type``  
-``DB_HOST=localhost``  
-``DB_PORT= //enter port``  
-``PORT= //enter port``  
+`DB_PASSWORD= //enter password 
+DB_NAME= //enter database name, or test database name 
+DB_USER= // enter database user type 
+DB_HOST=localhost 
+DB_PORT= //enter port  
+PORT= //enter port`  
 
 ## Running the project
 The Book Library project does not currently have a GUI and can be run locally.
@@ -45,7 +43,7 @@ Requests need to be sent in JSON format, and for examples see the test suite for
 As Author and Genre are associated with the Book table, queries to get a book item / list of book items will also show artist and genre tables. 
 
 ## Testing
-Testing is completed using Chai, Supertest, and Mocha test lirbaries. 
+Testing is completed using Chai, Supertest, and Mocha test libraries. 
 The project has a pre-test and post-test script which creates and then drops the test environment database before and after each run of the test suite. 
 
 ## Error Handling

@@ -36,6 +36,7 @@ describe('/readers', () => {
                     email: 'future_ms_darcy@gmail.com',
                     password: 'short',
                 });
+
                 expect(shortPassword.status).to.equal(400);
                 expect(shortPassword.body.error).to.equal('Please enter a password longer than 8 characters');
 
@@ -44,6 +45,7 @@ describe('/readers', () => {
                     email: 'future_ms_darcy@gmailcom',
                     password: 'correctlength',
                 });
+
                 expect(invalidEmail.status).to.equal(400);
                 expect(invalidEmail.body.error).to.equal('Please enter a valid email address');
 
@@ -52,6 +54,7 @@ describe('/readers', () => {
                     email: 'future_ms_darcy@gmail.com',
                     password: 'correctlength',
                 });
+
                 expect(noName.status).to.equal(400);
                 expect(noName.body.error).to.equal('Please enter a name');
 
@@ -60,6 +63,7 @@ describe('/readers', () => {
                     email: '',
                     password: 'correctlength',
                 });
+
                 expect(noEmail.status).to.equal(400);
                 expect(noEmail.body.error).to.equal('Please enter an email address');
 
@@ -68,6 +72,7 @@ describe('/readers', () => {
                     email: 'future_ms_darcy@gmail.com',
                     password: '',
                 });
+
                 expect(noPassword.status).to.equal(400);
                 expect(noPassword.body.error).to.equal('Please enter a password');
             })
@@ -111,7 +116,6 @@ describe('/readers', () => {
             it('gets readers record by id', async () => {
                 const reader = readers[0];
                 const response = await request(app).get(`/readers/${reader.id}`);
-
 
                 expect(response.status).to.equal(200);
                 expect(response.body.name).to.equal(reader.name);
@@ -157,30 +161,35 @@ describe('/readers', () => {
                 const shortPasswordUpdate = await request(app)
                 .patch('/readers/1')
                 .send({ password: 'short' });
+
                 expect(shortPasswordUpdate.status).to.equal(400);
                 expect(shortPasswordUpdate.body.error).to.equal('Please enter a password longer than 8 characters');
 
                 const invalidEmailUpdate = await request(app)
                 .patch('/readers/1')
                 .send({ email: 'email@email' });
+
                 expect(invalidEmailUpdate.status).to.equal(400);
                 expect(invalidEmailUpdate.body.error).to.equal('Please enter a valid email address');
 
                 const noNameUpdate = await request(app)
                 .patch('/readers/1')
                 .send({ name: '' });
+
                 expect(noNameUpdate.status).to.equal(400);
                 expect(noNameUpdate.body.error).to.equal('Please enter a name');
 
                 const noEmailUpdate = await request(app)
                 .patch('/readers/1')
                 .send({ email: '' });
+
                 expect(noEmailUpdate.status).to.equal(400);
                 expect(noEmailUpdate.body.error).to.equal('Please enter an email address');
 
                 const noPasswordUpdate = await request(app)
                 .patch('/readers/1')
                 .send({ password: '' });
+
                 expect(noPasswordUpdate.status).to.equal(400);
                 expect(noPasswordUpdate.body.error).to.equal('Please enter a password');
 
@@ -199,6 +208,7 @@ describe('/readers', () => {
 
             it('returns a 404 if the reader does not exist', async () => {
                 const response = await request(app).delete('/readers/12345');
+                
                 expect(response.status).to.equal(404);
                 expect(response.body.error).to.equal('The reader could not be found.');
             });

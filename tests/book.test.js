@@ -106,7 +106,6 @@ describe('/books', () => {
                     expect(book.AuthorId).to.equal(expected.AuthorId);
                     expect(book.GenreId).to.equal(expected.GenreId);
                     expect(book.ISBN).to.equal(expected.ISBN);
-
                     expect(book.Author).to.have.own.property('author');
                     expect(book.Genre).to.have.own.property('genre');
                 });
@@ -124,7 +123,6 @@ describe('/books', () => {
                 expect(response.body.AuthorId).to.equal(book.AuthorId);
                 expect(response.body.GenreId).to.equal(book.GenreId);
                 expect(response.body.ISBN).to.equal(book.ISBN);
-
                 expect(response.body.Author).to.have.own.property('author');
                 expect(response.body.Genre).to.have.own.property('genre');
             });
@@ -166,6 +164,7 @@ describe('/books', () => {
                 const noTitleUpdate = await request(app)
                 .patch('/books/1')
                 .send({ title: '' });
+
                 expect(noTitleUpdate.status).to.equal(400);
                 expect(noTitleUpdate.body.error).to.equal('Please enter a book title');
             });
@@ -183,6 +182,7 @@ describe('/books', () => {
 
             it('returns a 404 if the book does not exist', async () => {
                 const response = await request(app).delete('/books/12345');
+                
                 expect(response.status).to.equal(404);
                 expect(response.body.error).to.equal('The book could not be found.');
             });

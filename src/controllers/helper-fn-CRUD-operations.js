@@ -90,7 +90,7 @@ const updateItem = async (res, model, updateData, id) => {
         //console.log(err);
         const userErrMessageUpdate = validationErrorHandling(err);
         res.status(400).send(userErrMessageUpdate);    
-    };
+    }
 
 };
 
@@ -128,7 +128,7 @@ const deleteItem = async (res, model, id) => {
     } catch (err) {
         console.error(err);
         res.sendStatus(500);
-    };
+    }
 };
 
 module.exports = {
