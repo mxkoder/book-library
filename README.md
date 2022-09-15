@@ -7,8 +7,10 @@ I created this project as part of the [Manchester Codes](https://www.manchesterc
 The API has access to Reader, Book, Genre, and Author tables. Users (Readers) are able to create an entry for themselves and associate books with their account. Genre and Author information is kept in seperate but associated tables, allowing users to search the database by genre or author.
 There is also password authentification, and after a user creates a password it is hidden in the API, and other users are not able to access it. 
 
+This project is currently backend only, I may add a frontend in the future, or repurpose it into another project. 
+
 ## Setup
-The project uses JavaScript, Express.js, Node, and Sequelize.
+The project uses JavaScript, Express.js, Node.js, and Sequelize.
 Testing is done using Chai, Supertest, and Mocha. 
 
 Download and initial setup: 
@@ -47,7 +49,7 @@ Testing is completed using Chai, Supertest, and Mocha test libraries.
 The project has a pre-test and post-test script which creates and then drops the test environment database before and after each run of the test suite. 
 
 ## Error Handling
-The valiation error handling is abstracted to the '../src/controllers/helper-fn-validation-error-handling.js' file. 
+The validation error handling is abstracted to the '../src/controllers/helper-fn-validation-error-handling.js' file. 
 This keeps the validation and constraint error messages in one place, and the custom messages make the API more secure and keep the fact that Sequelize / MySQL is used hidden.  
 
 ## Next steps
@@ -66,7 +68,7 @@ Further improvements to project design would include:
 - Tests:
     - Refactoring tests to reduce repetition
     - Genre and Author test suites need tests adding to check Book associations are being returned for read and read by id api queries 
-    - Make testing more thorough by randomiser test data (e.g. using faker.js)
+    - Make testing more thorough by randomising test data (e.g. using faker.js)
 
 ## Author
 
